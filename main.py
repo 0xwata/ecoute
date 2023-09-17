@@ -16,13 +16,14 @@ def write_in_textbox(textbox, text):
 
 def update_transcript_UI(transcriber, textbox):
     transcript_string = transcriber.get_transcript()
+    print(f"transcript_string: {transcript_string}")
     write_in_textbox(textbox, transcript_string)
     textbox.after(300, update_transcript_UI, transcriber, textbox)
 
 def update_response_UI(responder, textbox, update_interval_slider_label, update_interval_slider, freeze_state):
     if not freeze_state[0]:
         response = responder.response
-
+        print(f"response: {response}")
         textbox.configure(state="normal")
         write_in_textbox(textbox, response)
         textbox.configure(state="disabled")
@@ -121,7 +122,6 @@ def main():
 
     update_transcript_UI(transcriber, transcript_textbox)
     update_response_UI(responder, response_textbox, update_interval_slider_label, update_interval_slider, freeze_state)
- 
     root.mainloop()
 
 if __name__ == "__main__":
